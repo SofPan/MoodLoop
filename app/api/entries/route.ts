@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import {prisma}  from '@/lib/prisma';
 
-// Hardcoded user ID for MVP (replace with your actual user ID from Prisma Studio)
-const DEMO_USER_ID = 'c8bd9219-3483-43e1-9e72-21488aebcb5b';
+// Hardcoded user ID for MVP (replace with dynamic user ID from Prisma Studio)
+const DEMO_USER_ID = 'ad4b09bb-38f4-4022-9371-9d67c57dee9f';
 
 export async function POST(request: NextRequest) {
   try {
