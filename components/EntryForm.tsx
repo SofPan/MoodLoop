@@ -103,7 +103,7 @@ const EntryForm = () => {
           id="date"
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
           required
         />
       </div>
@@ -128,7 +128,7 @@ const EntryForm = () => {
           value={formData.sleepHours}
           onChange={(e) => setFormData({ ...formData, sleepHours: e.target.value })}
           placeholder="e.g., 7.5"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
         />
       </div>
 
@@ -141,7 +141,7 @@ const EntryForm = () => {
           id="weather"
           value={formData.weather}
           onChange={(e) => setFormData({ ...formData, weather: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
         >
           <option value="">Select weather</option>
           <option value="sunny">☀️ Sunny</option>
@@ -165,7 +165,7 @@ const EntryForm = () => {
             onChange={(e) => setActivityInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="e.g., exercise, therapy, work"
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
           />
           <button
             type="button"
@@ -180,13 +180,13 @@ const EntryForm = () => {
             {formData.activities.map((activity) => (
               <span
                 key={activity}
-                className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
               >
                 {activity}
                 <button
                   type="button"
                   onClick={() => removeActivity(activity)}
-                  className="hover:text-blue-600"
+                  className="hover:text-green-700"
                 >
                   ×
                 </button>
@@ -213,7 +213,7 @@ const EntryForm = () => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+        className="w-full py-3 bg-green-700 text-white rounded-lg font-medium hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         {isSubmitting ? 'Saving...' : 'Save Entry'}
       </button>
