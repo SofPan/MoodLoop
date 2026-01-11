@@ -112,6 +112,7 @@ const EntryForm = () => {
           id="date"
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+          max={new Date().toISOString().split('T')[0]}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
           required
         />
