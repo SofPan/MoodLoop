@@ -66,10 +66,19 @@ const EntryForm = () => {
   };
 
   const addActivity = () => {
-    if (activityInput.trim() && !formData.activities.includes(activityInput.trim())) {
+    const input = activityInput.trim();
+    if (!input) return;
+
+    // Split by comma and process each tag
+    const newActivities = input
+      .split(',')
+      .map(tag => tag.trim())
+      .filter(tag => tag.length > 0 && !formData.activities.includes(tag));
+
+    if (newActivities.length > 0) {
       setFormData({
         ...formData,
-        activities: [...formData.activities, activityInput.trim()],
+        activities: [...formData.activities, ...newActivities],
       });
       setActivityInput('');
     }
@@ -213,7 +222,7 @@ const EntryForm = () => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-3 bg-green-700 text-white rounded-lg font-medium hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+        className="w-full py-3 bg-green-700 text-white rounded-lg font-medium hover:bg-green-900 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         {isSubmitting ? 'Saving...' : 'Save Entry'}
       </button>
