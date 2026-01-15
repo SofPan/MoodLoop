@@ -1,6 +1,8 @@
 'use client';
 
-import EntryForm from "@/components/EntryForm";
+import EntryList from "@/components/Entries/EntryList";
+
+// import EntryForm from "@/components/EntryForm";
 
 export default function Home() {
   return (
@@ -9,7 +11,8 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-center text-stone-700 mb-8">
           MoodLoop
         </h1>
-        <EntryForm />
+        {/* <EntryForm /> */}
+        <EntryList />
       </div>
     </main>
   );
