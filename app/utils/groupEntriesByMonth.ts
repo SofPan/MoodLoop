@@ -1,4 +1,4 @@
-import { Entry } from "@/components/Entries/EntryList";
+import { Entry } from "@/app/interfaces/Entries";
 
 export const groupEntriesByMonth = (entries: Entry[]) => {
   const grouped: Record<string, Entry[]> = {};

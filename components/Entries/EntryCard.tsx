@@ -1,10 +1,4 @@
-import { Entry } from "./EntryList";
-
-interface EntryCardProps {
-  entry: Entry;
-  isExpanded: boolean;
-  onClick: (entryId:string) => void;
-}
+import { EntryCardProps } from "@/app/interfaces/Entries";
 
 const moods = [
   { value: 1, emoji: '😞', label: 'Awful' },

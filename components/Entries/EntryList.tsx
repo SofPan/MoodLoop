@@ -1,57 +1,32 @@
 import { useState, useEffect } from "react";
-import EntryCard from "./EntryCard";
-
-export interface Entry {
-  id: string;
-  date: string;
-  moodRating: number;
-  sleepHours: number | null;
-  weather: string | null;
-  activities: string[];
-  createdAt: string;
-  updatedAt: string;
-  isExpanded: boolean;
-}
+import { Entry } from "@/app/interfaces/Entries";
+import MonthSection from "./MonthSection";
+import { mockEntries } from "@/app/mock/mockEntries";
 
 const EntryList = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string|null>(null);
-  const [expandedEntryId, setExpandedEntryId] = useState('');
   
   useEffect(() => {
-    const fetchEntries = async () => {
-      return await fetch('http://localhost:3000/api/entries')
-      .then(response => response.json())
-      .then(data => {
-        setEntries(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err);
-        setLoading(false);
-      })
-    }
+    // const fetchEntries = async () => {
+    //   return await fetch('http://localhost:3000/api/entries')
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     setEntries(data);
+    //     setLoading(false);
+    //   })
+    //   .catch(err => {
+    //     setError(err);
+    //     setLoading(false);
+    //   })
+    // }
 
-    fetchEntries();
+    // fetchEntries();
+    setEntries(mockEntries);
+    setLoading(false);
     },[]);
 
-    const handleCardClick = (entryId:string) => {
-      if (expandedEntryId === entryId){
-          setExpandedEntryId('')
-        } else {
-          setExpandedEntryId(entryId);
-        }
-    }
-
-    const displayEntries = entries.map((entry:Entry) => {
-      return <EntryCard key={entry.id}
-                entry={entry}
-                isExpanded={expandedEntryId === entry.id}
-                onClick={handleCardClick}
-              />
-    })
-  
   return (
     <div className="text-slate-500 size-full">
       <div className="size-full mx-auto px-20 py-10 text-center flex flex-wrap justify-evenly">
@@ -60,7 +35,7 @@ const EntryList = () => {
           :
           error ? error
           :
-          displayEntries
+          <MonthSection entries={entries} />
         }
       </div>
     </div>

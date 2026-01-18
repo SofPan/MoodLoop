@@ -11,6 +11,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-center text-slate-700 mb-8">
           MoodLoop
         </h1>
+        <h2>Nothing to see here...</h2>
         {/* <EntryForm /> */}
         <EntryList />
       </div>
