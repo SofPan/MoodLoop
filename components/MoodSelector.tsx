@@ -25,7 +25,7 @@ const MoodSelector = ({value, onChange}:MoodSelectorProps) => {
             onClick={() => onChange(mood.value)}
             className={`flex flex-col items-center p-3 rounded-lg border-2 transition-all hover:scale-110 ${
               value === mood.value
-                ? 'border-green-600 bg-green-50'
+                ? 'border-blue-600 bg-blue-50'
                 : 'border-gray-200 hover:border-gray-300'
             }`}
           >

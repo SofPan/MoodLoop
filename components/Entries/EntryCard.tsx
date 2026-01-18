@@ -1,14 +1,9 @@
-interface Entry {
-  entry:{
-    id: string;
-  date: string;
-  moodRating: number;
-  sleepHours: number | null;
-  weather: string | null;
-  activities: string[];
-  createdAt: string;
-  updatedAt: string;
-  }
+import { Entry } from "./EntryList";
+
+interface EntryCardProps {
+  entry: Entry;
+  isExpanded: boolean;
+  onClick: (entryId:string) => void;
 }
 
 const moods = [
@@ -19,8 +14,9 @@ const moods = [
   { value: 5, emoji: '😄', label: 'Great' },
 ];
 
-const EntryCard = ({entry}:Entry) => {
+const EntryCard = ({entry, isExpanded, onClick}:EntryCardProps) => {
   const {
+    id,
     date,
     sleepHours,
     moodRating,
@@ -36,20 +32,23 @@ const EntryCard = ({entry}:Entry) => {
     })
   }
 
-  const showActivities = activities.map((tag:string, i:number) => {
-    return <div className="border border-solid border-stone-300 p-1 m-1 rounded-sm w-max"  key={tag}>{tag}</div>
+  const showActivities = activities.map((tag:string) => {
+    return <div className="border border-solid border-slate-400 bg-slate-100 text-slate-500 px-3 py-1.5 text-sm shadow-sm m-1 rounded-full w-max gap-2"  key={tag}>{tag}</div>
   })
   return(
-    <div className="w-md bg-stone-100 p-8 inline-block mb-8 text-gray-700 rounded-sm shadow-sm">
-      <div className="mb-2">
-        <span>Date: {formattedDate}</span> | <span>Mood: {formattedMood(moodRating)}</span> <br />
+    <div onClick={() => onClick(id)} className={`w-2xl centered bg-white border border-slate-200 px-2 py-1 mx-4 my-2 text-slate-700 rounded-sm hover:shadow-md hover:border-slate-300 cursor-pointer overflow-hidden transition-height duration-500 ease-in-out ${isExpanded ? "h-[150px]" : "h-[70px]"}`}>
+      <h3 className="font-bold text-lg center">{formattedDate}</h3>
+      <div>
+        <span className="text-2xl">{formattedMood(moodRating)} </span>
+        <span>{weather}</span>
       </div>
-      <div className="mb-2">
-        <span>Weather: {weather}</span> | <span>Sleep: {sleepHours}</span> <br />
-      </div>
-      <span>Tags:</span>
-      <div className="inline-flex justify-evenly flex-wrap">
-        {showActivities}
+      <div className={`${isExpanded ? 'visible' : 'hidden'}`}>
+        <div>
+          <span className="italic">Slept for {sleepHours} hours.</span>
+        </div>
+        <div className="flex flex-wrap justify-center">
+          {showActivities}
+        </div>
       </div>
     </div>
   )
