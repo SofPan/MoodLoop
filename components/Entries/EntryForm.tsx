@@ -1,5 +1,6 @@
 import { useState } from "react";
-import MoodSelector from "./MoodSelector";
+import { useEntries } from "@/app/contexts/EntriesContext";
+import MoodSelector from "../MoodSelector";
 
 interface EntryFormData {
   date: string;
@@ -10,6 +11,7 @@ interface EntryFormData {
 }
 
 const EntryForm = () => {
+  const {refetchEntries} = useEntries();
   const [formData, setFormData] = useState<EntryFormData>({
     date: new Date().toISOString().split('T')[0], // Today's date
     moodRating: null,
@@ -58,6 +60,7 @@ const EntryForm = () => {
         activities: [],
       });
       setActivityInput('');
+      refetchEntries();
     } catch (error) {
       setMessage({ type: 'error', text: 'Failed to save entry. Please try again.' });
     } finally {

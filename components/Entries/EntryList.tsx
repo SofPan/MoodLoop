@@ -1,51 +1,63 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useEntries } from "@/app/contexts/EntriesContext";
 import { Entry } from "@/app/interfaces/Entries";
-import MonthSection from "./MonthSection";
-import { mockEntries } from "@/app/mock/mockEntries";
+import { groupEntriesByMonth } from "@/app/utils/groupEntriesByMonth";
+import EntryCard from "./EntryCard";
 
 const EntryList = () => {
-  const [entries, setEntries] = useState<Entry[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string|null>(null);
-  
+
+  const {entries, loading, error} = useEntries();
+
+  const [expandedEntryId, setExpandedEntryId] = useState('');
+  const [months, setMonths] = useState<string[]>([]);
+  const [groupedEntries, setGroupedEntries] = useState<Record<string, Entry[]>>({});
+
   useEffect(() => {
-    // const fetchEntries = async () => {
-    //   return await fetch('http://localhost:3000/api/entries')
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     setEntries(data);
-    //     setLoading(false);
-    //   })
-    //   .catch(err => {
-    //     setError(err);
-    //     setLoading(false);
-    //   })
-    // }
+    const extractMonthKeys = (entryArray:Entry[]) => {
+      const groupedEntries = groupEntriesByMonth(entryArray);
+  
+      const monthKeys = Object.keys(groupedEntries);
+  
+      setMonths(monthKeys);
+      setGroupedEntries(groupedEntries);
+    }
 
-    // fetchEntries();
-    setEntries(mockEntries);
-    setLoading(false);
-    },[]);
+    extractMonthKeys(entries);
+  },[entries]);
 
-  return (
-    <div className="text-slate-500 size-full">
-      <div className="size-full mx-auto px-20 py-10 text-center flex flex-wrap justify-evenly">
-        {
-          loading ? "Loading..."
-          :
-          error ? error
-          :
-          <MonthSection entries={entries} />
+    const handleCardClick = (entryId:string) => {
+      if (expandedEntryId === entryId){
+          setExpandedEntryId('')
+        } else {
+          setExpandedEntryId(entryId);
         }
-      </div>
+    }
+    const mapMonths = months.map(month => {
+      return (
+        <div key={month}>
+          <h2>{month}</h2>
+            {groupedEntries[month].map((entry) => (
+                <EntryCard 
+                    key={entry.id}
+                    entry={entry}
+                    isExpanded={expandedEntryId === entry.id}
+                    onClick={() => handleCardClick(entry.id)}
+                  />
+              )
+            )}
+          </div>
+        )
+  })
+ 
+  return(
+    <div className="text-slate-500 size-full mx-auto px-20 py-10 text-center flex flex-wrap justify-evenly">
+      {
+        loading ? "Loading..."
+        : error ? `There was an error ${error}`
+        : mapMonths
+      }
     </div>
   )
 }
 
 export default EntryList;
-
-// In the return/JSX:
-//   - If loading: show "Loading..."
-//   - If error: show error message
-//   - If entries exist: map over them and display each entry's date and mood
-//   - If no entries: show "No entries yet"

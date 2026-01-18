@@ -13,7 +13,7 @@ export const mockEntries: Entry[] = [
     updatedAt: "2026-01-15T10:00:00Z"
   },
   {
-    id: "2",
+    id: "xyz2",
     userId: "demo-user",
     date: "2026-01-10",
     moodRating: 3,
@@ -24,7 +24,7 @@ export const mockEntries: Entry[] = [
     updatedAt: "2026-01-10T09:00:00Z"
   },
   {
-    id: "3",
+    id: "xyz3",
     userId: "demo-user",
     date: "2025-12-28",
     moodRating: 5,
@@ -35,7 +35,7 @@ export const mockEntries: Entry[] = [
     updatedAt: "2025-12-28T14:00:00Z"
   },
   {
-    id: "4",
+    id: "xyz4",
     userId: "demo-user",
     date: "2025-12-20",
     moodRating: 2,
@@ -46,7 +46,7 @@ export const mockEntries: Entry[] = [
     updatedAt: "2025-12-20T08:00:00Z"
   },
   {
-    id: "5",
+    id: "xyz5",
     userId: "demo-user",
     date: "2025-12-15",
     moodRating: 4,
@@ -57,7 +57,7 @@ export const mockEntries: Entry[] = [
     updatedAt: "2025-12-15T11:00:00Z"
   },
   {
-    id: "6",
+    id: "xyz6",
     userId: "demo-user",
     date: "2025-11-25",
     moodRating: 3,
@@ -68,7 +68,7 @@ export const mockEntries: Entry[] = [
     updatedAt: "2025-11-25T16:00:00Z"
   },
   {
-    id: "7",
+    id: "xyz7",
     userId: "demo-user",
     date: "2025-11-18",
     moodRating: 5,
@@ -79,7 +79,7 @@ export const mockEntries: Entry[] = [
     updatedAt: "2025-11-18T13:00:00Z"
   },
   {
-    id: "8",
+    id: "xyz8",
     userId: "demo-user",
     date: "2025-11-10",
     moodRating: 2,
@@ -90,7 +90,7 @@ export const mockEntries: Entry[] = [
     updatedAt: "2025-11-10T07:00:00Z"
   },
   {
-    id: "9",
+    id: "xyz9",
     userId: "demo-user",
     date: "2025-10-30",
     moodRating: 4,
@@ -101,7 +101,7 @@ export const mockEntries: Entry[] = [
     updatedAt: "2025-10-30T12:00:00Z"
   },
   {
-    id: "10",
+    id: "xyz10",
     userId: "demo-user",
     date: "2025-10-22",
     moodRating: 3,
