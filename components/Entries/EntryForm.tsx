@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEntries } from "@/app/contexts/EntriesContext";
 import MoodSelector from "../MoodSelector";
+import Activities from "../FormFields/Activities";
 
 interface EntryFormData {
   date: string;
@@ -19,7 +20,6 @@ const EntryForm = () => {
     weather: '',
     activities: [],
   });
-  const [activityInput, setActivityInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
@@ -59,7 +59,6 @@ const EntryForm = () => {
         weather: '',
         activities: [],
       });
-      setActivityInput('');
       refetchEntries();
     } catch (error) {
       setMessage({ type: 'error', text: 'Failed to save entry. Please try again.' });
@@ -68,38 +67,9 @@ const EntryForm = () => {
     }
   };
 
-  const addActivity = () => {
-    const input = activityInput.trim();
-    if (!input) return;
-
-    // Split by comma and process each tag
-    const newActivities = input
-      .split(',')
-      .map(tag => tag.trim())
-      .filter(tag => tag.length > 0 && !formData.activities.includes(tag));
-
-    if (newActivities.length > 0) {
-      setFormData({
-        ...formData,
-        activities: [...formData.activities, ...newActivities],
-      });
-      setActivityInput('');
-    }
-  };
-
-  const removeActivity = (activity: string) => {
-    setFormData({
-      ...formData,
-      activities: formData.activities.filter((a) => a !== activity),
-    });
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      addActivity();
-    }
-  };
+  // const addToFormData = (payload:unknown) => {
+  //   setFormData({...formData, payload});
+  // }
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 space-y-6">
@@ -166,49 +136,7 @@ const EntryForm = () => {
       </div>
 
       {/* Activities */}
-      <div>
-        <label htmlFor="activities" className="block text-sm font-medium text-gray-700 mb-1">
-          Activities (optional)
-        </label>
-        <div className="flex gap-2 mb-2">
-          <input
-            type="text"
-            id="activities"
-            value={activityInput}
-            onChange={(e) => setActivityInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="e.g., exercise, therapy, work"
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-          <button
-            type="button"
-            onClick={addActivity}
-            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition"
-          >
-            Add
-          </button>
-        </div>
-        {formData.activities.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {formData.activities.map((activity) => (
-              <span
-                key={activity}
-                className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
-              >
-                {activity}
-                <button
-                  type="button"
-                  onClick={() => removeActivity(activity)}
-                  className="hover:text-blue-600"
-                >
-                  ×
-                </button>
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-
+      <Activities setFormData={setFormData} formData={formData}/>
       {/* Message */}
       {message && (
         <div

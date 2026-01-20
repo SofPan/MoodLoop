@@ -5,15 +5,18 @@ import { Entry } from "../interfaces/Entries";
 
 interface EntryContext {
   entries: Entry[];
+  editingEntry: Entry | null;
   loading: boolean;
   error: string | null;
   refetchEntries: () => void;
+  editEntry: (id:string) => void;
 }
 
 const EntriesContext = createContext<EntryContext | undefined>(undefined);
 
 export const EntriesProvider = ({ children }: { children: React.ReactNode }) => {
   const [entries, setEntries] = useState<Entry[]>([]);
+  const [editingEntry, setEditingEntry] = useState<Entry | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string|null>(null);
     
@@ -40,11 +43,21 @@ export const EntriesProvider = ({ children }: { children: React.ReactNode }) => 
     fetchEntries();
   };
 
+  const editEntry = (id:string) => {
+    const entryToEdit = entries.filter(entry => {
+      return entry.id === id && entry;
+    });
+
+    setEditingEntry(entryToEdit[0]);
+  }
+
   const entryState:EntryContext = {
     entries,
+    editingEntry,
     loading,
     error,
-    refetchEntries
+    refetchEntries,
+    editEntry
   }
 
   return(
