@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction, useState } from "react";
 interface EntryFormData {
   date: string;
   moodRating: number | null;
-  sleepHours: string;
-  weather: string;
+  sleepHours: number | null;
+  weather: string | null;
   activities: string[];
 }
 

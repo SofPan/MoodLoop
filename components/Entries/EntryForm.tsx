@@ -1,22 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useEntries } from "@/app/contexts/EntriesContext";
-import MoodSelector from "../MoodSelector";
+import MoodSelector from "../FormFields/MoodSelector";
 import Activities from "../FormFields/Activities";
 
 interface EntryFormData {
   date: string;
   moodRating: number | null;
-  sleepHours: string;
-  weather: string;
+  sleepHours: number | null;
+  weather: string | null;
   activities: string[];
 }
 
 const EntryForm = () => {
-  const {refetchEntries} = useEntries();
+  const {refetchEntries, editingEntry, editEntry, setEditingEntry} = useEntries();
   const [formData, setFormData] = useState<EntryFormData>({
     date: new Date().toISOString().split('T')[0], // Today's date
     moodRating: null,
-    sleepHours: '',
+    sleepHours: 0,
     weather: '',
     activities: [],
   });
@@ -41,7 +41,7 @@ const EntryForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          sleepHours: formData.sleepHours ? parseFloat(formData.sleepHours) : null,
+          sleepHours: formData.sleepHours,
         }),
       });
 
@@ -55,7 +55,7 @@ const EntryForm = () => {
       setFormData({
         date: new Date().toISOString().split('T')[0],
         moodRating: null,
-        sleepHours: '',
+        sleepHours: 0,
         weather: '',
         activities: [],
       });
@@ -67,9 +67,21 @@ const EntryForm = () => {
     }
   };
 
-  // const addToFormData = (payload:unknown) => {
-  //   setFormData({...formData, payload});
-  // }
+  useEffect(() => {
+    if (editingEntry){
+      const dateCorrection = editingEntry.date.split("T")[0];
+      setFormData({...editingEntry, date:dateCorrection});
+    } else {
+      // Reset form
+      setFormData({
+        date: new Date().toISOString().split('T')[0],
+        moodRating: null,
+        sleepHours: 0,
+        weather: '',
+        activities: [],
+      });
+    }
+  },[editingEntry])
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 space-y-6">
@@ -109,7 +121,7 @@ const EntryForm = () => {
           min="0"
           max="24"
           value={formData.sleepHours}
-          onChange={(e) => setFormData({ ...formData, sleepHours: e.target.value })}
+          onChange={(e) => setFormData({ ...formData, sleepHours: Number(e.target.value) })}
           placeholder="e.g., 7.5"
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
@@ -154,10 +166,17 @@ const EntryForm = () => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+        className="w-full py-3 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         {isSubmitting ? 'Saving...' : 'Save Entry'}
       </button>
+      {/* Cancel Edit Button */}
+      {editingEntry && 
+      <button className="w-full py-3 bg-red-500 text-white rounded-lg font-bold hover:bg-red-600 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+      onClick={() => setEditingEntry(null) }>
+          Cancel
+      </button>
+      }
     </form>
   );
 }

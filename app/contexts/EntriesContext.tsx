@@ -1,11 +1,12 @@
 'use client';
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Entry } from "../interfaces/Entries";
 
 
 interface EntryContext {
   entries: Entry[];
   editingEntry: Entry | null;
+  setEditingEntry: Dispatch<SetStateAction<Entry | null>>;
   loading: boolean;
   error: string | null;
   refetchEntries: () => void;
@@ -54,6 +55,7 @@ export const EntriesProvider = ({ children }: { children: React.ReactNode }) => 
   const entryState:EntryContext = {
     entries,
     editingEntry,
+    setEditingEntry,
     loading,
     error,
     refetchEntries,
