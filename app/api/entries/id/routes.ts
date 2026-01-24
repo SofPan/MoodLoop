@@ -1,3 +1,0 @@
-// GET one
-// PUT
-// DELETE

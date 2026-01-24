@@ -71,3 +71,53 @@ export async function GET() {
     );
   }
 }
+
+export async function PUT(request: NextRequest) {
+  try{
+    const body = await request.json();
+    const {id, date, moodRating, sleepHours, weather, activities } = body;
+
+    // Validation
+    if (!date || !moodRating) {
+      return NextResponse.json(
+        { error: 'Date and mood rating are required' },
+        { status: 400 }
+      );
+    }
+
+    if (moodRating < 1 || moodRating > 5) {
+      return NextResponse.json(
+        { error: 'Mood rating must be between 1 and 5' },
+        { status: 400 }
+      );
+    }
+
+    const editEntry = await prisma.entry.update({
+      where: {id: id},
+      data: {
+        date: new Date(date),
+        moodRating,
+        sleepHours: sleepHours || null,
+        weather: weather || null,
+        activities: activities || [],
+      }
+    });
+
+    return NextResponse.json(editEntry, {status: 201});
+  } catch (error){
+    console.error('Error editing entry:', error);
+    
+    // Handle unique constraint violation (duplicate date)
+    if (error instanceof Error && 'code' in error && error.code === 'P2002') {
+      return NextResponse.json(
+        { error: 'An entry for this date already exists' },
+        { status: 409 }
+      );
+    }
+
+    return NextResponse.json(
+      { error: 'Failed to edit entry' },
+      { status: 500 }
+    );
+  }
+}

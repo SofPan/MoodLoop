@@ -12,7 +12,7 @@ interface EntryFormData {
 }
 
 const EntryForm = () => {
-  const {refetchEntries, editingEntry, editEntry, setEditingEntry} = useEntries();
+  const {refetchEntries, editingEntry, setEditingEntry} = useEntries();
   const [formData, setFormData] = useState<EntryFormData>({
     date: new Date().toISOString().split('T')[0], // Today's date
     moodRating: null,
@@ -36,14 +36,27 @@ const EntryForm = () => {
     setMessage(null);
 
     try {
-      const response = await fetch('/api/entries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          sleepHours: formData.sleepHours,
-        }),
-      });
+      let response;
+      if (editingEntry){
+        response = await fetch('/api/entries', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...formData,
+            id: editingEntry.id,
+            sleepHours: formData.sleepHours,
+          }),
+        });
+      } else {
+        response = await fetch('/api/entries', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...formData,
+            sleepHours: formData.sleepHours,
+          }),
+        });
+      }
 
       if (!response.ok) {
         throw new Error('Failed to save entry');
