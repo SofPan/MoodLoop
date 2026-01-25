@@ -11,6 +11,7 @@ interface EntryContext {
   error: string | null;
   refetchEntries: () => void;
   editEntry: (id:string) => void;
+  deleteEntry: (id:string) => void;
 }
 
 const EntriesContext = createContext<EntryContext | undefined>(undefined);
@@ -52,6 +53,25 @@ export const EntriesProvider = ({ children }: { children: React.ReactNode }) => 
     setEditingEntry(entryToEdit[0]);
   }
 
+  const deleteEntry = async (id: string) => {
+    try{
+      const response = await fetch('/api/entries', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id
+          }),
+        });
+        if (response.ok){
+          refetchEntries();
+        }
+          
+        
+    } catch(err){
+      setError(err instanceof Error ? err.message : 'Failed to delete');
+    }
+  }
+
   const entryState:EntryContext = {
     entries,
     editingEntry,
@@ -59,7 +79,8 @@ export const EntriesProvider = ({ children }: { children: React.ReactNode }) => 
     loading,
     error,
     refetchEntries,
-    editEntry
+    editEntry,
+    deleteEntry
   }
 
   return(

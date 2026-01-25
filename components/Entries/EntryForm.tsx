@@ -74,6 +74,7 @@ const EntryForm = () => {
       });
       refetchEntries();
     } catch (error) {
+      console.error(error);
       setMessage({ type: 'error', text: 'Failed to save entry. Please try again.' });
     } finally {
       setIsSubmitting(false);
@@ -133,7 +134,7 @@ const EntryForm = () => {
           step="0.5"
           min="0"
           max="24"
-          value={formData.sleepHours}
+          value={formData.sleepHours?.toString() || ''}
           onChange={(e) => setFormData({ ...formData, sleepHours: Number(e.target.value) })}
           placeholder="e.g., 7.5"
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -147,7 +148,7 @@ const EntryForm = () => {
         </label>
         <select
           id="weather"
-          value={formData.weather}
+          value={formData.weather?.toString()||''}
           onChange={(e) => setFormData({ ...formData, weather: e.target.value })}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >

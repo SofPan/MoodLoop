@@ -121,3 +121,19 @@ export async function PUT(request: NextRequest) {
     );
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  const {id} = await request.json();
+  try{
+    const deleteEntry = await prisma.entry.delete({
+      where: {id}
+    });
+    return NextResponse.json(deleteEntry, {status: 201});
+  } catch(error) {
+    console.error('Error fetching entries:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete entry' },
+      { status: 500 }
+    )
+  }
+}

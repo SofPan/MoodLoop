@@ -1,5 +1,6 @@
 import { EntryCardProps } from "@/app/interfaces/Entries";
 import EditEntry from "./EditEntry";
+import DeleteEntry from "./DeleteEntry";
 
 const moods = [
   { value: 1, emoji: '😞', label: 'Awful' },
@@ -46,6 +47,7 @@ const EntryCard = ({entry, isExpanded, onClick}:EntryCardProps) => {
         </div>
         <div className="mt-1">
           <EditEntry id={id}/>
+          <DeleteEntry id={id} />
         </div>
         
       </div>
