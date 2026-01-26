@@ -13,10 +13,8 @@ export default function Home() {
           <h1 className="text-4xl font-bold text-center text-slate-700 mb-8">
             MoodLoop
           </h1>
-          <div className="flex justify-evenly">
-            <EntryForm />
-            <ChartContainer />
-          </div>
+          {/* <EntryForm /> */}
+          <ChartContainer />
           <EntryList />
         </div>
       </main>

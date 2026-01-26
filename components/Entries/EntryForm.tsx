@@ -14,7 +14,7 @@ interface EntryFormData {
 const EntryForm = () => {
   const {refetchEntries, editingEntry, setEditingEntry} = useEntries();
   const [formData, setFormData] = useState<EntryFormData>({
-    date: new Date().toISOString().split('T')[0], // Today's date
+    date: new Date().toLocaleDateString('en-US', {timeZone: 'EST', year: 'numeric', month: 'short', day: 'numeric'}),
     moodRating: null,
     sleepHours: 0,
     weather: '',
@@ -135,7 +135,7 @@ const EntryForm = () => {
             step="0.5"
             min="0"
             max="24"
-            value={formData.sleepHours?.toString() || ''}
+            value={formData.sleepHours?.toString() || '0'}
             onChange={(e) => setFormData({ ...formData, sleepHours: Number(e.target.value) })}
             placeholder="e.g., 7.5"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
