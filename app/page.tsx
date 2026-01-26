@@ -2,6 +2,7 @@
 import EntryList from "@/components/Entries/EntryList";
 import { EntriesProvider } from "./contexts/EntriesContext";
 import EntryForm from "@/components/Entries/EntryForm";
+import ChartContainer from "@/components/Chart/ChartContainer";
 
 
 export default function Home() {
@@ -12,7 +13,10 @@ export default function Home() {
           <h1 className="text-4xl font-bold text-center text-slate-700 mb-8">
             MoodLoop
           </h1>
-          <EntryForm />
+          <div className="flex justify-evenly">
+            <EntryForm />
+            <ChartContainer />
+          </div>
           <EntryList />
         </div>
       </main>
