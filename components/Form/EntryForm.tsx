@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, SetStateAction, Dispatch } from "react";
 import { useEntries } from "@/app/contexts/EntriesContext";
-import MoodSelector from "../FormFields/MoodSelector";
-import Activities from "../FormFields/Activities";
+import MoodSelector from "./MoodSelector";
+import Activities from "./Activities";
 
 interface EntryFormData {
   date: string;
@@ -11,7 +11,11 @@ interface EntryFormData {
   activities: string[];
 }
 
-const EntryForm = () => {
+interface EntryFormProps{
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+}
+
+const EntryForm = ({setIsOpen}:EntryFormProps) => {
   const {refetchEntries, editingEntry, setEditingEntry} = useEntries();
   const [formData, setFormData] = useState<EntryFormData>({
     date: new Date().toLocaleDateString('en-US', {timeZone: 'EST', year: 'numeric', month: 'short', day: 'numeric'}),
@@ -73,6 +77,7 @@ const EntryForm = () => {
         activities: [],
       });
       refetchEntries();
+      setIsOpen(false);
     } catch (error) {
       console.error(error);
       setMessage({ type: 'error', text: 'Failed to save entry. Please try again.' });
@@ -98,8 +103,8 @@ const EntryForm = () => {
   },[editingEntry])
 
   return (
-    <div className="w-1/3">
-      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 space-y-6">
+    <div className="w-full">
+      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
         <h2 className="text-2xl font-bold text-gray-800">Daily Entry</h2>
 
         {/* Date */}
@@ -181,14 +186,17 @@ const EntryForm = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="w-full py-3 bg-sage-700 text-white rounded-lg font-bold hover:bg-sage-800 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
         >
           {isSubmitting ? 'Saving...' : 'Save Entry'}
         </button>
         {/* Cancel Edit Button */}
         {editingEntry && 
         <button className="w-full py-3 bg-red-500 text-white rounded-lg font-bold hover:bg-red-600 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
-        onClick={() => setEditingEntry(null) }>
+        onClick={() => {
+          setEditingEntry(null);
+          setIsOpen(false);
+          } }>
             Cancel
         </button>
         }

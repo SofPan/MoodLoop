@@ -32,12 +32,12 @@ const ChartContainer = () => {
   }
   return(
     <div className="w-full flex items-center justify-evenly flex-col">
-      <div className="w-full text-center">
+      <div className="w-full text-center flex flex-col justify-evenly items-center">
         <h2 className="text-xl font-bold mb-6">Your Mood Statistics for the Selected Period</h2>
         <Stats entries={chartEntries}/>
       </div>
       <div className="w-full flex flex-col items-center">
-        <div className="self-start pl-20">
+        <div className="self-start pl-16 mb-4">
           <form id="filter-settings" onSubmit={handleSubmit}>
             <label htmlFor="dayFilter">Days to View: </label>
             <input 
@@ -47,8 +47,9 @@ const ChartContainer = () => {
               max={365}
               value={filterValue?.toString() || '0'} 
               onChange={(e) => setFilterValue(Number(e.target.value))}
+              className="border-stone-400 rounded-sm px-1 bg-sage-50 w-15 mr-2 text-center border"
               ></input>
-            <button type="submit">Apply</button>
+            <button type="submit" className="border border-sage-600 rounded-sm bg-sage-400 px-1 text-white shadow-sm font-normal hover:cursor-pointer hover:bg-sage-700 hover:shadow-md">Apply</button>
           </form>
         </div>
       <Chart data={chartEntries}/>

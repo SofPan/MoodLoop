@@ -1,19 +1,19 @@
 'use client';
 import EntryList from "@/components/Entries/EntryList";
 import { EntriesProvider } from "./contexts/EntriesContext";
-import EntryForm from "@/components/Entries/EntryForm";
 import ChartContainer from "@/components/Chart/ChartContainer";
+import FormDrawer from "@/components/Form/FormDrawer";
 
 
 export default function Home() {
   return (
     <EntriesProvider>
-      <main className="min-h-screen bg-slate-50 py-8">
+      <main className="min-h-screen bg-sage-100 py-8 text-stone-700">
         <div className="container mx-auto size-full">
-          <h1 className="text-4xl font-bold text-center text-slate-700 mb-8">
+          <h1 className="text-4xl font-bold text-center text-stone-800 mb-8">
             MoodLoop
           </h1>
-          {/* <EntryForm /> */}
+          <FormDrawer />
           <ChartContainer />
           <EntryList />
         </div>

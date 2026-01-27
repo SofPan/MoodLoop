@@ -12,6 +12,18 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@theme {
+  --color-sage-50: oklch(0.959 0.0085 145.51);
+  --color-sage-100: oklch(0.9184 0.0165 142.55);
+  --color-sage-200: oklch(0.8746 0.0236 143.35);
+  --color-sage-300: oklch(0.8332 0.0319 142.32);
+  --color-sage-400: oklch(0.7909 0.04 144.01);
+  --color-sage-500: oklch(0.748 0.0494 144.12);
+  --color-sage-600: oklch(0.7055 0.0584 143.35);
+  --color-sage-700: oklch(0.6595 0.0665 143.42);
+  --color-sage-800: oklch(0.6161 0.0757 142.85);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

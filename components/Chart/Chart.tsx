@@ -18,12 +18,12 @@ const Chart = ({data}:chartProps) => {
       }}
       
     >
-      <CartesianGrid strokeDasharray="3 3" />
+      <CartesianGrid strokeDasharray="3 3" fill="#eef3ee" />
       <XAxis dataKey="date" />
       <YAxis dataKey="mood" width="auto" />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="mood" stroke="#8884d8" isAnimationActive={true} animationDuration={2000} />
+      <Line type="monotone" dataKey="mood" stroke="#6a9167" isAnimationActive={true} animationDuration={2000} />
     </LineChart>
   )
 }

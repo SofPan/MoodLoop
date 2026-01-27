@@ -35,7 +35,8 @@ const EntryList = () => {
     const mapMonths = months.map(month => {
       return (
         <div key={month}>
-          <h2>{month}</h2>
+          <h2 className="text-2xl text-stone-600 font-bold mb-3">{month}</h2>
+          <div className="grid grid-cols-3 gap-4">
             {groupedEntries[month].map((entry) => (
                 <EntryCard 
                     key={entry.id}
@@ -46,11 +47,12 @@ const EntryList = () => {
               )
             )}
           </div>
+          </div>
         )
   })
  
   return(
-    <div className="text-slate-500 size-full mx-auto px-20 py-10 text-center flex flex-wrap justify-evenly">
+    <div className="text-stone-500 size-full mx-auto py-10 text-center flex items-center flex-col">
       {
         loading ? "Loading..."
         : error ? `There was an error ${error}`

@@ -51,7 +51,7 @@ const Activities = ({setFormData, formData}:ActivitiesProps) => {
 
   return(
       <div>
-        <label htmlFor="activities" className="block text-sm font-medium text-slate-700 mb-1">
+        <label htmlFor="activities" className="block text-sm font-medium text-stone-700 mb-1">
           Activities (optional)
         </label>
         <div className="flex gap-2 mb-2">
@@ -62,12 +62,12 @@ const Activities = ({setFormData, formData}:ActivitiesProps) => {
             onChange={(e) => setActivityInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="e.g., exercise, therapy, work"
-            className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-slate-400 text-slate-800"
+            className="flex-1 px-3 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-stone-400 text-stone-800"
           />
           <button
             type="button"
             onClick={addActivity}
-            className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition"
+            className="px-4 py-2 bg-sage-300 text-white font-bold rounded-lg hover:bg-sage-500 transition"
           >
             Add
           </button>
