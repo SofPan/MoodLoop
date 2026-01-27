@@ -1,27 +1,3 @@
-/**
- * Layout:
- * - Fixed positioned drawer (right side of screen)
- * - Slides in/out with CSS transform
- * - Overlay/backdrop when open (click to close)
- * - Toggle button always visible (tab sticking out when closed)
- * 
- * Contains:
- * - EntryForm component
- * - Close button (X icon)
- * 
- * Behavior:
- * - Opens when editingEntry is set (from context)
- * - Closes after successful submit
- * - Closes on backdrop click or X button
- * - Smooth slide animation (transition-transform duration-300)
- * 
- * Styling:
- * - Width: w-96 or w-full on mobile
- * - Height: full screen
- * - Background: white with shadow
- * - z-index high enough to overlay everything
- */
-
 import { useState } from "react";
 import EntryForm from "./EntryForm";
 

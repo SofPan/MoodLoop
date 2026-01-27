@@ -2,6 +2,7 @@ import { EntryCardProps } from "@/app/interfaces/Entries";
 import EditEntry from "./EditEntry";
 import DeleteEntry from "./DeleteEntry";
 import CardWrapper from "../Chart/CardWrapper";
+import { formatDate } from "@/app/utils/dateHelpers";
 
 const moods = [
   { value: 1, emoji: '😞', label: 'Awful' },
@@ -21,7 +22,7 @@ const EntryCard = ({entry, isExpanded, onClick}:EntryCardProps) => {
     activities
   } = entry
 
-  const formattedDate = date.toLocaleString().split('T')[0]
+  const formattedDate = formatDate(date);
 
   const formattedMood = (rating:number) => {
     return moods.map(mood => {

@@ -2,10 +2,8 @@ import { useState } from "react";
 import { useEntries } from "@/app/contexts/EntriesContext";
 import Chart from "./Chart";
 import Stats from "./Stats";
+import { formatDate, parseEntryDate } from "@/app/utils/dateHelpers";
 
-const dateFormatter = (date:Date) => {
-  return date.toLocaleDateString('en-US', { timeZone:'EST', year: 'numeric', month: 'short', day: 'numeric' });
-}
 
 const ChartContainer = () => {
   const {entries} = useEntries();
@@ -17,12 +15,12 @@ const ChartContainer = () => {
   startDate.setDate(today.getDate() - Math.abs(daysToFilter));
 
   const filteredEntries = entries.filter(entry => {
-    const entryDate = new Date(entry.date);
+    const entryDate = parseEntryDate(entry.date);
     return entryDate >= startDate && entryDate <= today;
   });
 
   const chartEntries = filteredEntries.map(entry => {
-    const date = dateFormatter(new Date(entry.date));
+    const date = formatDate(entry.date);
     return {date: date, mood: entry.moodRating}
   });
 

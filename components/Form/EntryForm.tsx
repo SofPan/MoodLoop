@@ -2,6 +2,7 @@ import { useEffect, useState, SetStateAction, Dispatch } from "react";
 import { useEntries } from "@/app/contexts/EntriesContext";
 import MoodSelector from "./MoodSelector";
 import Activities from "./Activities";
+import { getTodayDateString } from "@/app/utils/dateHelpers";
 
 interface EntryFormData {
   date: string;
@@ -18,7 +19,7 @@ interface EntryFormProps{
 const EntryForm = ({setIsOpen}:EntryFormProps) => {
   const {refetchEntries, editingEntry, setEditingEntry} = useEntries();
   const [formData, setFormData] = useState<EntryFormData>({
-    date: new Date().toLocaleDateString('en-US', {timeZone: 'EST', year: 'numeric', month: 'short', day: 'numeric'}),
+    date: getTodayDateString(),
     moodRating: null,
     sleepHours: 0,
     weather: '',
@@ -70,7 +71,7 @@ const EntryForm = ({setIsOpen}:EntryFormProps) => {
       
       // Reset form
       setFormData({
-        date: new Date().toISOString().split('T')[0],
+        date: getTodayDateString(),
         moodRating: null,
         sleepHours: 0,
         weather: '',
@@ -93,7 +94,7 @@ const EntryForm = ({setIsOpen}:EntryFormProps) => {
     } else {
       // Reset form
       setFormData({
-        date: new Date().toISOString().split('T')[0],
+        date: getTodayDateString(),
         moodRating: null,
         sleepHours: 0,
         weather: '',
@@ -117,7 +118,7 @@ const EntryForm = ({setIsOpen}:EntryFormProps) => {
             id="date"
             value={formData.date}
             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-            max={new Date().toISOString().split('T')[0]}
+            max={getTodayDateString()}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             required
           />
