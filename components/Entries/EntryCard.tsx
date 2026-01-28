@@ -32,13 +32,13 @@ const EntryCard = ({entry, isExpanded, onClick}:EntryCardProps) => {
   })
   return(
     <CardWrapper> 
-      <div onClick={() => onClick(id)} className={`cursor-pointer overflow-hidden transition-height duration-500 ease-in-out ${isExpanded ? "h-[180px]" : "h-[70px]"}`}>
+      <div onClick={() => onClick(id)} className={`cursor-pointer overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? "max-h-[500px] md:col-span-3" : "max-h-[80px]"}`}>
         <h3 className="font-bold text-lg center">{formattedDate}</h3>
         <div>
           <span className="text-2xl">{formattedEmoji(moodRating, moods)} </span>
           <span>{formattedEmoji(weather, weatherEmoji)}</span>
         </div>
-        <div className={`${isExpanded ? 'visible' : 'hidden'}`}>
+        <div className={`${isExpanded ? 'block' : 'hidden'}`}>
           <div className="flex justify-center items-center">
             <span className="italic">Slept for {sleepHours} hours.</span>
           </div>
