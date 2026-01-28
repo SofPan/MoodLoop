@@ -43,7 +43,7 @@ export const EntriesProvider = ({ children }: { children: React.ReactNode }) => 
     
   const fetchEntries = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/entries');
+      const response = await fetch('/api/entries');
       const data = await response.json();
       setEntries(data);
       setError(null);
