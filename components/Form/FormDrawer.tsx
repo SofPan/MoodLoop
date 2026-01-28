@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EntryForm from "./EntryForm";
+import { useEntries } from "@/app/contexts/EntriesContext";
 
 const FormDrawer = () => {
+  const {editingEntry} = useEntries();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if(editingEntry) setIsOpen(true);
+  },[editingEntry])
 
   return(
     <div className="md:px-12 relative">
