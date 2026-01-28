@@ -22,9 +22,9 @@ const Stats = ({entries}:StatsProps) => {
       <CardWrapper>
         <div>Average Mood Rating<span className="text-xl font-bold block">{entries.length && averageMood(entries)}</span> </div>
       </CardWrapper>
-      <CardWrapper>
+      {/* <CardWrapper>
         <div>Average Sleep Duration<span className="text-xl font-bold block">#</span> </div>
-      </CardWrapper>
+      </CardWrapper> */}
     </div>
   )
 }
