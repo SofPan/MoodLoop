@@ -11,7 +11,7 @@ const Stats = ({entries}) => {
   }
 
   return(
-    <div className="place-items-center-safe grid grid-cols-3 gap-1 w-full mb-8">
+    <div className="place-items-center-safe grid md:grid-cols-3 gap-1 w-full mb-8">
       <CardWrapper>
         <div>Total Entries<span className="text-xl font-bold block">{entries.length}</span></div>
       </CardWrapper>

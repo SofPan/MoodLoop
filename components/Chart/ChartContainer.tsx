@@ -31,11 +31,11 @@ const ChartContainer = () => {
   return(
     <div className="w-full flex items-center justify-evenly flex-col">
       <div className="w-full text-center flex flex-col justify-evenly items-center">
-        <h2 className="text-xl font-bold mb-6">Your Mood Statistics for the Selected Period</h2>
+        <h2 className="text-lg md:text-xl font-bold mb-6">Your Mood Statistics for the Selected Period</h2>
         <Stats entries={chartEntries}/>
       </div>
       <div className="w-full flex flex-col items-center">
-        <div className="self-start pl-16 mb-4">
+        <div className="self-start pl-8 md:pl-16  mb-4">
           <form id="filter-settings" onSubmit={handleSubmit}>
             <label htmlFor="dayFilter">Days to View: </label>
             <input 

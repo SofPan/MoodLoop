@@ -13,7 +13,7 @@ interface EntryContext {
   editEntry: (id:string) => void;
   deleteEntry: (id:string) => void;
   moods:{value:number, emoji:string, label: string}[];
-  weatherEmoji:{value:number, emoji:string, label: string}[];
+  weatherEmoji:{value:string, emoji:string, label: string}[];
 }
 
 const moods = [
