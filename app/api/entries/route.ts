@@ -24,6 +24,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const sanitizedActivities = activities.map((activity:string):string => {
+      const encoded = encodeURIComponent(activity);
+      return encoded.replaceAll("%20", " ");
+  });
+
     // Create entry
     const entry = await prisma.entry.create({
       data: {
@@ -32,7 +37,7 @@ export async function POST(request: NextRequest) {
         moodRating,
         sleepHours: sleepHours || null,
         weather: weather || null,
-        activities: activities || [],
+        activities: sanitizedActivities || [],
       },
     });
 

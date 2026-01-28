@@ -1,6 +1,10 @@
 import CardWrapper from "./CardWrapper";
 
-const Stats = ({entries}) => {
+interface StatsProps {
+  entries: {date:string, mood:number}[];
+}
+
+const Stats = ({entries}:StatsProps) => {
   const averageMood = (entries:{ date: string; mood: number; }[]) => {
     let sum = 0;
     for (const entry of entries){
@@ -16,7 +20,7 @@ const Stats = ({entries}) => {
         <div>Total Entries<span className="text-xl font-bold block">{entries.length}</span></div>
       </CardWrapper>
       <CardWrapper>
-        <div>Average Mood Rating<span className="text-xl font-bold block">{averageMood(entries)}</span> </div>
+        <div>Average Mood Rating<span className="text-xl font-bold block">{entries.length && averageMood(entries)}</span> </div>
       </CardWrapper>
       <CardWrapper>
         <div>Average Sleep Duration<span className="text-xl font-bold block">#</span> </div>

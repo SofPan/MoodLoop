@@ -13,6 +13,9 @@ interface ActivitiesProps {
   formData: EntryFormData;
 }
 
+const MAX_TAG_LENGTH = 50;
+const MAX_TOTAL_LENGTH = 500;
+
 const Activities = ({setFormData, formData}:ActivitiesProps) => {
   const [activityInput, setActivityInput] = useState('');
 
@@ -24,7 +27,7 @@ const Activities = ({setFormData, formData}:ActivitiesProps) => {
     const newActivities = input
       .split(',')
       .map(tag => tag.trim())
-      .filter(tag => tag.length > 0 && !formData.activities.includes(tag));
+      .filter(tag => tag.length > 0 && tag.length <= MAX_TAG_LENGTH && !formData.activities.includes(tag));
 
     if (newActivities.length > 0) {
       setFormData({
@@ -60,6 +63,7 @@ const Activities = ({setFormData, formData}:ActivitiesProps) => {
             id="activities"
             value={activityInput}
             onChange={(e) => setActivityInput(e.target.value)}
+            maxLength={MAX_TOTAL_LENGTH}
             onKeyPress={handleKeyPress}
             placeholder="e.g., exercise, therapy, work"
             className="flex-1 px-3 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-stone-400 text-stone-800"
