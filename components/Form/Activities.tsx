@@ -4,7 +4,7 @@ interface EntryFormData {
   date: string;
   moodRating: number | null;
   sleepHours: number | null;
-  weather: string | null;
+  weather: string;
   activities: string[];
 }
 

@@ -3,12 +3,13 @@ import { useEntries } from "@/app/contexts/EntriesContext";
 import MoodSelector from "./MoodSelector";
 import Activities from "./Activities";
 import { getTodayDateString } from "@/app/utils/dateHelpers";
+import WeatherSelector from "./WeatherSelector";
 
 interface EntryFormData {
   date: string;
   moodRating: number | null;
   sleepHours: number | null;
-  weather: string | null;
+  weather: string;
   activities: string[];
 }
 
@@ -149,25 +150,10 @@ const EntryForm = ({setIsOpen}:EntryFormProps) => {
         </div>
 
         {/* Weather */}
-        <div>
-          <label htmlFor="weather" className="block text-sm font-medium text-gray-700 mb-1">
-            Weather (optional)
-          </label>
-          <select
-            id="weather"
-            value={formData.weather?.toString()||''}
-            onChange={(e) => setFormData({ ...formData, weather: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            <option value="">Select weather</option>
-            <option value="sunny">☀️ Sunny</option>
-            <option value="cloudy">☁️ Cloudy</option>
-            <option value="rainy">🌧️ Rainy</option>
-            <option value="snowy">❄️ Snowy</option>
-            <option value="stormy">⛈️ Stormy</option>
-          </select>
-        </div>
-
+        <WeatherSelector 
+          value={formData.weather}
+          onChange={(weather) => setFormData({ ...formData, weather: weather })}
+        />
         {/* Activities */}
         <Activities setFormData={setFormData} formData={formData}/>
         {/* Message */}

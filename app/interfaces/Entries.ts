@@ -5,7 +5,7 @@ export interface Entry {
   date: string;
   moodRating: number;
   sleepHours: number | null;
-  weather: string | null;
+  weather: string;
   activities: string[];
   createdAt: string;
   updatedAt: string;

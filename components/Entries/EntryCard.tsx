@@ -3,14 +3,7 @@ import EditEntry from "./EditEntry";
 import DeleteEntry from "./DeleteEntry";
 import CardWrapper from "../Chart/CardWrapper";
 import { formatDate } from "@/app/utils/dateHelpers";
-
-const moods = [
-  { value: 1, emoji: '😞', label: 'Awful' },
-  { value: 2, emoji: '😕', label: 'Bad' },
-  { value: 3, emoji: '😐', label: 'Okay' },
-  { value: 4, emoji: '🙂', label: 'Good' },
-  { value: 5, emoji: '😄', label: 'Great' },
-];
+import { useEntries } from "@/app/contexts/EntriesContext";
 
 const EntryCard = ({entry, isExpanded, onClick}:EntryCardProps) => {
   const {
@@ -22,12 +15,16 @@ const EntryCard = ({entry, isExpanded, onClick}:EntryCardProps) => {
     activities
   } = entry
 
+  const {moods, weatherEmoji} = useEntries();
+
   const formattedDate = formatDate(date);
 
-  const formattedMood = (rating:number) => {
-    return moods.map(mood => {
-      return mood.value === rating && mood.emoji;
-    })
+  const formattedEmoji = (
+    value: number | string, 
+    emojiSelect: {value: number | string, emoji: string, label: string}[]
+  ): string => {
+    const found = emojiSelect.find(emoji => emoji.value === value);
+    return found ? found.emoji : '';
   }
 
   const showActivities = activities.map((tag:string) => {
@@ -38,8 +35,8 @@ const EntryCard = ({entry, isExpanded, onClick}:EntryCardProps) => {
       <div onClick={() => onClick(id)} className={`cursor-pointer overflow-hidden transition-height duration-500 ease-in-out ${isExpanded ? "h-[180px]" : "h-[70px]"}`}>
         <h3 className="font-bold text-lg center">{formattedDate}</h3>
         <div>
-          <span className="text-2xl">{formattedMood(moodRating)} </span>
-          <span>{weather}</span>
+          <span className="text-2xl">{formattedEmoji(moodRating, moods)} </span>
+          <span>{formattedEmoji(weather, weatherEmoji)}</span>
         </div>
         <div className={`${isExpanded ? 'visible' : 'hidden'}`}>
           <div className="flex justify-center items-center">

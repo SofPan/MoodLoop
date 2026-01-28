@@ -12,7 +12,26 @@ interface EntryContext {
   refetchEntries: () => void;
   editEntry: (id:string) => void;
   deleteEntry: (id:string) => void;
+  moods:{value:number, emoji:string, label: string}[];
+  weatherEmoji:{value:number, emoji:string, label: string}[];
 }
+
+const moods = [
+  { value: 1, emoji: '😞', label: 'Awful' },
+  { value: 2, emoji: '😕', label: 'Bad' },
+  { value: 3, emoji: '😐', label: 'Okay' },
+  { value: 4, emoji: '🙂', label: 'Good' },
+  { value: 5, emoji: '😄', label: 'Great' },
+];
+
+const weatherEmoji = [
+  { value: 'select', emoji: ' ', label: 'Select' },
+  { value:'sunny', emoji: '☀️', label: 'Sunny' },
+  { value:'cloudy', emoji: '☁️', label: 'Cloudy' },
+  { value:'rainy', emoji: '🌧️', label: 'Rainy' },
+  { value:'snowy', emoji: '❄️', label: 'Snowy' },
+  { value:'stormy', emoji: '⛈️', label: 'Stormy' },
+];
 
 const EntriesContext = createContext<EntryContext | undefined>(undefined);
 
@@ -80,7 +99,9 @@ export const EntriesProvider = ({ children }: { children: React.ReactNode }) => 
     error,
     refetchEntries,
     editEntry,
-    deleteEntry
+    deleteEntry,
+    moods,
+    weatherEmoji
   }
 
   return(

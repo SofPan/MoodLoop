@@ -1,17 +1,13 @@
+import { useEntries } from "@/app/contexts/EntriesContext";
+
 interface MoodSelectorProps {
   value: number | null;
   onChange: (mood: number) => void;
 }
 
-const moods = [
-  { value: 1, emoji: '😞', label: 'Awful' },
-  { value: 2, emoji: '😕', label: 'Bad' },
-  { value: 3, emoji: '😐', label: 'Okay' },
-  { value: 4, emoji: '🙂', label: 'Good' },
-  { value: 5, emoji: '😄', label: 'Great' },
-];
-
 const MoodSelector = ({value, onChange}:MoodSelectorProps) => {
+  const {moods} = useEntries();
+  
   return(
     <div className="space-y-2">
       <label className="block text-sm font-medium text-gray700">
