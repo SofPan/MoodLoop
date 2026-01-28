@@ -1,7 +1,7 @@
 import { EntryCardProps } from "@/app/interfaces/Entries";
 import EditEntry from "./EditEntry";
 import DeleteEntry from "./DeleteEntry";
-import CardWrapper from "../Chart/CardWrapper";
+import CardWrapper from "../Visual/CardWrapper";
 import { formatDate } from "@/app/utils/dateHelpers";
 import { useEntries } from "@/app/contexts/EntriesContext";
 

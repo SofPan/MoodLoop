@@ -1,4 +1,4 @@
-import CardWrapper from "./CardWrapper";
+import CardWrapper from "../Visual/CardWrapper";
 
 interface StatsProps {
   entries: {date:string, mood:number}[];
