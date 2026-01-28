@@ -3,6 +3,7 @@ import EntryList from "@/components/Entries/EntryList";
 import { EntriesProvider } from "./contexts/EntriesContext";
 import ChartContainer from "@/components/Chart/ChartContainer";
 import FormDrawer from "@/components/Form/FormDrawer";
+import ComingSoon from "@/components/ComingSoon";
 
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
     <EntriesProvider>
       <main className="min-h-screen w-screen bg-sage-100 py-8 text-stone-700">
         <div className="container mx-auto w-screen text-center">
+          <ComingSoon />
           <h1 className="text-2xl md:text-4xl mx-auto font-bold text-center text-stone-800 mb-8">
             MoodLoop
           </h1>
