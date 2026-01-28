@@ -17,13 +17,13 @@ const Stats = ({entries}:StatsProps) => {
   return(
     <div className="place-items-center-safe grid md:grid-cols-3 gap-1 w-full mb-8">
       <CardWrapper>
-        <div>Total Entries<span className="text-xl font-bold block">{entries.length}</span></div>
+        <div> 🌿 Total Entries<span className="text-xl font-bold block">{entries.length}</span></div>
       </CardWrapper>
       <CardWrapper>
-        <div>Average Mood Rating<span className="text-xl font-bold block">{entries.length && averageMood(entries)}</span> </div>
+        <div> 🫶 Average Mood Rating<span className="text-xl font-bold block">{entries.length && averageMood(entries)}</span> </div>
       </CardWrapper>
       <CardWrapper>
-        <div>More Stats TBA<span className="text-xl font-bold block">#</span> </div>
+        <div> ✨ More Stats TBA<span className="text-xl font-bold block">#</span> </div>
       </CardWrapper>
     </div>
   )
