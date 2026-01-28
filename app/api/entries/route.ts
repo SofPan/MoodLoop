@@ -24,10 +24,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const sanitizedActivities = activities.map((activity:string):string => {
-      const encoded = encodeURIComponent(activity);
-      return encoded.replaceAll("%20", " ");
-  });
+    const sanitizeString = (str: string): string => {
+      return str
+        .replace(/<[^>]*>/g, '') 
+        .replace(/[<>'"]/g, '') 
+        .trim()
+        .slice(0, 50);
+    };
+
+    const sanitizedActivities = activities.map((activity:string) => sanitizeString(activity))
+    .filter((activity:string) => activity.length > 0);
 
     // Create entry
     const entry = await prisma.entry.create({

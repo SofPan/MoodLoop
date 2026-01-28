@@ -20,7 +20,7 @@ const Chart = ({data}:chartProps) => {
     >
       <CartesianGrid strokeDasharray="3 3" fill="#eef3ee" />
       <XAxis dataKey="date" />
-      <YAxis dataKey="mood" width="auto" />
+      <YAxis dataKey="mood" width="auto" domain={[1, 5]} />
       <Tooltip />
       <Legend />
       <Line type="monotone" dataKey="mood" stroke="#6a9167" isAnimationActive={true} animationDuration={2000} />
