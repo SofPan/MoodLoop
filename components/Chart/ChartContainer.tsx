@@ -7,7 +7,7 @@ import { formatDate, parseEntryDate } from "@/app/utils/dateHelpers";
 
 const ChartContainer = () => {
   const {entries} = useEntries();
-  const [daysToFilter, setDaysToFilter] = useState(7);
+  const [daysToFilter, setDaysToFilter] = useState(365);
   const [filterValue, setFilterValue] = useState(daysToFilter);
 
   const today = new Date();
